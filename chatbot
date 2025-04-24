@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FinanceAI Chatbot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f9f9f9;
+    }
+    
+    .chat-container {
+      position: fixed;
+      bottom: 10px;
+      right: 20px;
+      width: 300px;
+      height: 400px;
+      background-color: #2D82B7;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .chat-header {
+      background-color: #1A5C8D;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 10px 10px 0 0;
+    }
+    
+    .chat-box {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background-color: white;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .chat-input {
+      padding: 10px;
+      border-top: 1px solid #ddd;
+      display: flex;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .chat-input button {
+      padding: 10px;
+      background-color: #2D82B7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .chat-input button:hover {
+      background-color: #1A5C8D;
+    }
+
+    .message {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      background-color: #f1f1f1;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .bot-message {
+      background-color: #e0f7fa;
+      text-align: left;
+    }
+
+    .user-message {
+      background-color: #c8e6c9;
+      text-align: right;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="chat-header">
+    <h3>FinanceAI Chatbot</h3>
+  </div>
+  <div class="chat-box" id="chat-box">
+    <div class="message bot-message">Hi! How can I assist you with your finances today?</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="user-input" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+  function sendMessage() {
+    var userInput = document.getElementById("user-input").value;
+    if (userInput.trim() != "") {
+      var userMessage = document.createElement("div");
+      userMessage.classList.add("message", "user-message");
+      userMessage.textContent = userInput;
+      document.getElementById("chat-box").appendChild(userMessage);
+
+      document.getElementById("user-input").value = "";
+
+      setTimeout(function() {
+        var botResponse = generateBotResponse(userInput);
+        var botMessage = document.createElement("div");
+        botMessage.classList.add("message", "bot-message");
+        botMessage.textContent = botResponse;
+        document.getElementById("chat-box").appendChild(botMessage);
+        document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
+      }, 1000);
+    }
+  }
+
+  function generateBotResponse(input) {
+    var response = "I'm here to help you manage your money!";
+    // Add simple response logic or integrate with an AI API here
+    if (input.includes("budget")) {
+      response = "I can help you set a personalized budget! Let's start by tracking your expenses.";
+    } else if (input.includes("save")) {
+      response = "Great choice! Let's work on your saving goals.";
+    } else if (input.includes("invest")) {
+      response = "I can suggest investment opportunities based on your risk tolerance.";
+    }
+    return response;
+  }
+</script>
+
+</body>
+</html>
